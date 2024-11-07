@@ -17,7 +17,24 @@ export default function Car() {
   const { make, model, year, mileage, imageURL } = useLocalSearchParams();
 
   const [maintenanceData, setMaintenanceData] = useState<MaintenanceData | null>(null);
-  setMaintenanceData(maintenanceDataFile);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchMaintenanceData = async () => {
+    try{
+      if(maintenanceDataFile) {
+        setMaintenanceData(maintenanceDataFile);
+        setLoading(false);
+        return
+      }
+    } catch (error: any) {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    fetchMaintenanceData();
+  }, []);
+
   return (
     <ThemedView>
       <ThemedView style={styles.box}>
@@ -32,15 +49,20 @@ export default function Car() {
                 <ThemedText>Mileage: {mileage}</ThemedText>
               </ThemedView>
             </ThemedView>
-            <ScrollView contentContainerStyle={styles.scrollView}>
-              <Text style={styles.header}>Maintenance Data:</Text>
-              {maintenanceData != null ? maintenanceData.data.map((record, index) => ( // Assuming maintenanceData has a 'data' property containing an array
-                <Text key={index} style={styles.dataText}>
-                  {index + 1 + '. ' + record.desc} every {record.due_mileage} miles
-                </Text>
-              )) : <Text>No maintenance data</Text>}
-              <Text style={styles.dataText}>{JSON.stringify(maintenanceData, null, 2)}</Text>
-            </ScrollView>
+
+            {loading && <ActivityIndicator size="large" color="#00ff00" />}
+      {error && <Text style={styles.errorText}>Error: {error}</Text>}
+      {maintenanceData && (
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Text style={styles.header}>Maintenance Data:</Text>
+          {maintenanceData.map((record, index) => ( // Assuming maintenanceData has a 'data' property containing an array
+            <Text key={index} style={styles.dataText}>
+              {index + 1 + '. ' + record.desc} every {record.due_mileage} miles
+            </Text>
+          ))}
+          <Text style={styles.dataText}>{JSON.stringify(maintenanceData, null, 2)}</Text>
+        </ScrollView>
+      )}
 
     </ThemedView>
   );
