@@ -1,0 +1,484 @@
+[
+  {
+    "desc": "Change Engine Oil and Filter",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Brake Hoses & Lines",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Brake System, Friction Material and Hydraulic System.",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Driveshaft Boots",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Exhaust System",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Fuel Lines and Connections",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Parking Brake Operation & Tension",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Suspension Components",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Tie-Rod Ends, Steering Gear & Boots",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 2,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 101.44,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Rotate Tires, Inspect Tire Wear, and Adjust Tire Pressure.",
+    "due_mileage": 7500,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 7500,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 2,
+      "repair_hours": 0.5,
+      "labor_rate_per_hour": 101.44,
+      "part_cost": 0,
+      "labor_cost": 50.72,
+      "misc_cost": 25,
+      "total_cost": 75.72
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect All Fluids and Correct Level",
+    "due_mileage": 10000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 10000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 2,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 101.44,
+      "part_cost": 5.52,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 5.52
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Automatic Transmission Fluid Level & Condition",
+    "due_mileage": 10000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 10000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Cooling System",
+    "due_mileage": 10000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 10000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Interior/Exterior Lights & Electrical Components",
+    "due_mileage": 10000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 10000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 1,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 101.44,
+      "part_cost": 7.48,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 7.48
+    },
+    "parts": null
+  },
+  {
+    "desc": "Replace Cabin Air Filter",
+    "due_mileage": 15000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 15000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Change Brake Fluid",
+    "due_mileage": 30000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 30000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 2,
+      "repair_hours": 0.8,
+      "labor_rate_per_hour": 101.44,
+      "part_cost": 26,
+      "labor_cost": 81.15,
+      "misc_cost": 25,
+      "total_cost": 132.15
+    },
+    "parts": [
+      {
+        "desc": "Brake Fluid",
+        "manufacturer": "",
+        "price": 13,
+        "qty": 2
+      }
+    ]
+  },
+  {
+    "desc": "Change VTM-4 Rear Differential Fluid",
+    "due_mileage": 30000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 30000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Drive/Accessory Belt(s) and Tension.",
+    "due_mileage": 30000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 30000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Replace Engine Air Filter",
+    "due_mileage": 30000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 30000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Change Automatic Transmission Fluid",
+    "due_mileage": 45000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 45000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Engine Idle Speed",
+    "due_mileage": 105000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 105000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Inspect Valve Clearance",
+    "due_mileage": 105000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 105000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Replace Spark Plugs",
+    "due_mileage": 105000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 105000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Replace Timing Belt & Inspect Water Pump",
+    "due_mileage": 105000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 105000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  },
+  {
+    "desc": "Change Engine Coolant",
+    "due_mileage": 120000,
+    "due_km": 0,
+    "is_oem": true,
+    "is_cycle": true,
+    "cycle_mileage": 120000,
+    "cycle_km": 0,
+    "repair": {
+      "repair_difficulty": 0,
+      "repair_hours": 0,
+      "labor_rate_per_hour": 0,
+      "part_cost": 0,
+      "labor_cost": 0,
+      "misc_cost": 0,
+      "total_cost": 0
+    },
+    "parts": null
+  }
+]
