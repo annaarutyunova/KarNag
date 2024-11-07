@@ -5,13 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { collection, getDocs } from 'firebase/firestore';
 // import { db } from '@/firebase.config'; // Import Firestore instance
 
-
 const maintenanceDataFile = require('@/assets/hondapilot.json');
-
-// interface Car {
-//   make: string;
-//   model: string;
-// }
 
 // Define the types for your data
 interface MaintenanceRecord {
@@ -98,33 +92,6 @@ export default function App() {
     </View>
   );
 }
-
-// export default function App() {
-//   const [cars, setCars] = useState<Car[]>([]);
-
-//   useEffect(() => {
-//     const fetchCars = async () => {
-//       try {
-//         const carsCollection = collection(db, 'Cars');
-//         const carsSnapshot = await getDocs(carsCollection);
-//         const carsList = carsSnapshot.docs.map(doc => doc.data() as Car);
-//         setCars(carsList);
-//       } catch (error) {
-//         console.error('Error fetching cars data: ', error);
-//       }
-//     };
-
-//     fetchCars();
-//   }, []);
-
-//   return (
-//     <View style={styles.container}>
-//       {cars.map((car, index) => (
-//         <Text key={index}>{car.make} {car.model}</Text>
-//       ))}
-//     </View>
-//   );
-// }
 
 const styles = StyleSheet.create({
   container: {
