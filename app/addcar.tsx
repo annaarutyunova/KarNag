@@ -38,7 +38,7 @@ export default function Addcar() {
     });
 
     if(!result.canceled) {
-      // console.log(result);
+      console.log(result);
       setSelectedImage(result.assets[0].uri)
     } else {
       alert('You did not select any image.');
@@ -66,6 +66,7 @@ export default function Addcar() {
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
+        console.log("ImageURL", imageURL)
         await setDoc(res, {imageURL: imageURL}, {merge: true});
         console.log("image uploaded")
 
