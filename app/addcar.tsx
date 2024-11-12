@@ -15,6 +15,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 interface Car {
+  id: string;
   make: string;
   model: string;
   mileage: number;
@@ -28,6 +29,7 @@ export default function Addcar() {
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   const [mileage, setMileage] = useState('');
+  const [id, setID] = useState('');
   const color = useThemeColor({light: "black", dark: "#B5B5B5"}, "text")
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
@@ -47,6 +49,7 @@ export default function Addcar() {
 
   const saveCar = async () => {
     const carData = {
+      id: id,
       make: make.trim() || "Make",
       model: model.trim() || "Model",
       year: year.trim() || 1998,
@@ -56,6 +59,12 @@ export default function Addcar() {
     try {
       const cars = collection(db, "Cars")
       const res = await addDoc(cars, carData)
+      console.log(res.id)
+      if(res){
+        setID(res.id)
+        await setDoc(res, {id: res.id}, {merge: true})
+        console.log("ID added", id)
+      }
       
       if(selectedImage) {
         // Create a storage reference from our storage service
@@ -66,13 +75,19 @@ export default function Addcar() {
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
-        console.log("ImageURL", imageURL)
+        // console.log("ImageURL", imageURL)
         await setDoc(res, {imageURL: imageURL}, {merge: true});
-        console.log("image uploaded")
+        // console.log("image uploaded")
 
       }
 
-      setMake(''); setModel(''); setMileage(''); setYear(''); setSelectedImage(undefined);
+      setMake(''); 
+      setModel(''); 
+      setMileage(''); 
+      setYear(''); 
+      setSelectedImage(undefined);
+      setID('');
+
       router.push("/(tabs)")
     } catch(error) {
       console.error(`Error adding car: `, error)

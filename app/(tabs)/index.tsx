@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ScrollView, Image, Text, Pressable } from 'react-native';
+import { StyleSheet, ScrollView, Image, Pressable, ActionSheetIOS } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase.config'; // Import Firestore instance
 import { Link } from 'expo-router';
@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 interface Car {
+  id: string,
   make: string;
   model: string;
   mileage: number;
@@ -26,6 +27,7 @@ export default function Car() {
         const carsSnapshot = await getDocs(carsCollection);
         const carsList = carsSnapshot.docs.map(doc => doc.data());
         setCars(carsList as Car[]);
+        console.log()
       } catch (error) {
         console.error('Error fetching cars data: ', error);
       }
@@ -34,6 +36,14 @@ export default function Car() {
     fetchCars();
   }, []);
   
+  // type carProps = {
+  //   // id: string,
+  //   imageURL: string,
+  //   make: string,
+  //   model: string,
+  //   year: number,
+  //   mileage: number
+  // }
 
   return (
       <ThemedView style={styles.container}>
@@ -43,6 +53,7 @@ export default function Car() {
             <Link key={index} style={styles.box} href={{
               pathname:'/car',
               params: {
+                id: car.id,
                 make: car.make,
                 model: car.model,
                 year: car.year,
@@ -50,7 +61,7 @@ export default function Car() {
                 imageURL: car.imageURL
               }
               }}>
-              <ThemedView style={styles.box} >
+              <ThemedView style={styles.box}>
                 <Image
                   style={styles.image}
                   source={{
@@ -62,6 +73,7 @@ export default function Car() {
                   <ThemedText>Mileage: {car.mileage}</ThemedText>
                 </ThemedView>
               </ThemedView>
+
             </Link>
           ))}
         </ScrollView>

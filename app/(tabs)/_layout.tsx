@@ -5,6 +5,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { FontAwesome } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -25,20 +26,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="image"
+        name="profile"
         options={{
-          title: 'Image',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="file-photo-o" size={24} color={color} />          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
+          title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+            <MaterialIcons name="account-circle" size={24} color={color} />        ),
         }}
       />
     </Tabs> 

@@ -14,7 +14,7 @@ interface MaintenanceData {
 }
 
 export default function Car() { 
-  const { make, model, year, mileage, imageURL } = useLocalSearchParams();
+  const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
 
   const [maintenanceData, setMaintenanceData] = useState<MaintenanceData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,19 +38,19 @@ export default function Car() {
   return (
     <ThemedView>
       <ThemedView style={styles.box}>
-              <Image
-                style={styles.image}
-                source={{
-                uri: `${imageURL}`
-                  }}></Image>
-              <ThemedView style={styles.carInfo}>
-                <ThemedText>{make} {model}</ThemedText>
-                <ThemedText>Year: {year}</ThemedText>
-                <ThemedText>Mileage: {mileage}</ThemedText>
-              </ThemedView>
-            </ThemedView>
+        <Image
+          style={styles.image}
+          source={{
+          uri: `${imageURL}`
+            }}></Image>
+        <ThemedView style={styles.carInfo}>
+          <ThemedText>{make} {model}</ThemedText>
+          <ThemedText>Year: {year}</ThemedText>
+          <ThemedText>Mileage: {mileage}</ThemedText>
+        </ThemedView>
+      </ThemedView>
 
-            {loading && <ActivityIndicator size="large" color="#00ff00" />}
+      {/* {loading && <ActivityIndicator size="large" color="#00ff00" />}
       {error && <Text style={styles.errorText}>Error: {error}</Text>}
       {maintenanceData && (
         <ScrollView contentContainerStyle={styles.scrollView}>
@@ -62,8 +62,7 @@ export default function Car() {
           ))}
           <Text style={styles.dataText}>{JSON.stringify(maintenanceData, null, 2)}</Text>
         </ScrollView>
-      )}
-
+      )} */}
     </ThemedView>
   );
 }
