@@ -29,6 +29,7 @@ export default function Addcar() {
   console.log(selectedCarImage)
 
   const pickImageAsync = async () => {
+    console.log("picking image")
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1,
@@ -37,8 +38,6 @@ export default function Addcar() {
     if(!result.canceled) {
       console.log(result.assets[0].uri);
       setSelectedImage(result.assets[0].uri)
-    } else {
-      alert('You did not select any image.');
     }
   };
 
@@ -56,15 +55,16 @@ export default function Addcar() {
       const res = await updateDoc(carRef, carData)
       console.log("Updated successfully")
       
-      if(selectedCarImage && selectedCarImage == imageURL) {
+      if(selectedCarImage && selectedCarImage != imageURL) {
         // Create a storage reference from our storage service
         const imageRef = ref(storage, `${id}.jpg`);
         const img = await fetch(selectedCarImage);
         const bytes = await img.blob();
-        console.log("Bytes", bytes)
+        console.log("Edit car bytes", bytes)
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
+        console.log("Image URL in edit car", imageURL)
         await setDoc(carRef, {imageURL: imageURL}, {merge: true});
 
       }
