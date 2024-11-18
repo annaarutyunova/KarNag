@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { StyleSheet, Image, ActivityIndicator, Text, ScrollView } from 'react-native';
-import { useLocalSearchParams} from 'expo-router';
+import { StyleSheet, Image } from 'react-native';
+import { useLocalSearchParams} from '@/node_modules/expo-router';
+import { Link } from '@/node_modules/expo-router';
+import FontAwesome5 from '@/node_modules/@expo/vector-icons/FontAwesome5';
 const maintenanceDataFile = require('@/assets/hondapilot.json');
 
 interface MaintenanceRecord {
@@ -38,6 +40,20 @@ export default function Car() {
   return (
     <ThemedView>
       <ThemedView style={styles.box}>
+        <Link style={styles.button}
+        href={{
+          pathname:'/editCar',
+          params: {
+            id: id,
+            make: make,
+            model: model,
+            year: year,
+            mileage: mileage,
+            imageURL: imageURL
+          }
+          }}>  
+          <FontAwesome5 name="edit" size={20} color="green" />
+        </Link>
         <Image
           style={styles.image}
           source={{
@@ -50,7 +66,7 @@ export default function Car() {
         </ThemedView>
       </ThemedView>
 
-      {/* {loading && <ActivityIndicator size="large" color="#00ff00" />}
+      {/* {loading && <ActivityIndicator color="#00ff00" />}
       {error && <Text style={styles.errorText}>Error: {error}</Text>}
       {maintenanceData && (
         <ScrollView contentContainerStyle={styles.scrollView}>
@@ -71,7 +87,10 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 40,
     padding: 12,
-    textAlign: 'center'
+    textAlign: 'center',
+    position: 'absolute',
+    right: 20,
+    top: 5
   },
   image: {
     width: 150,
@@ -83,7 +102,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    position: 'relative'
   },
   carInfo: {
     display: 'flex',
@@ -106,5 +126,5 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
-  },
+  }
 });
