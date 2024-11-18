@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ScrollView, Image, Pressable, ActionSheetIOS } from 'react-native';
+import { StyleSheet, ScrollView, Image} from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase.config'; // Import Firestore instance
 import { Link } from 'expo-router';

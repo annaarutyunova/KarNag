@@ -2,14 +2,12 @@ import React, {useState} from 'react';
 import { StyleSheet, TextInput, Pressable, Image, ScrollView } from 'react-native';
 import Button from '@/components/Button';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, getDocs, setDoc, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { setDoc, updateDoc, doc } from 'firebase/firestore';
 import { db, storage } from '@/firebase.config'; 
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { useRouter } from '@/node_modules/expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import { useLocalSearchParams} from '@/node_modules/expo-router';
 
 function ensureString(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] : value || '';

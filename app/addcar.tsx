@@ -2,15 +2,12 @@ import React, {useState} from 'react';
 import { StyleSheet, TextInput, Pressable } from 'react-native';
 import Button from '@/components/Button';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import { collection, getDocs, setDoc, addDoc } from 'firebase/firestore';
 import { db, storage } from '@/firebase.config'; // Import Firestore instance
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useRouter } from 'expo-router';
-import ImageViewer from '@/components/ImageViewer'; 
 import * as ImagePicker from 'expo-image-picker';
 
 

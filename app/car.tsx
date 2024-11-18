@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { StyleSheet, Image } from 'react-native';
-import { useLocalSearchParams} from '@/node_modules/expo-router';
-import { Link } from '@/node_modules/expo-router';
-import FontAwesome5 from '@/node_modules/@expo/vector-icons/FontAwesome5';
+import { Link, useLocalSearchParams } from 'expo-router';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 const maintenanceDataFile = require('@/assets/hondapilot.json');
 
 interface MaintenanceRecord {
