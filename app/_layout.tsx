@@ -31,7 +31,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ title: 'All Cars', headerShown: false }} />
         <Stack.Screen name="addcar" options={{ title: 'Add New Car', headerShown: true }} />
-        <Stack.Screen name="car" options={{ title: 'My Car', headerShown: true }} />
+        <Stack.Screen name="screens" options={{ title: '', headerShown: true }} />
         <Stack.Screen name="+not-found"  />
       </Stack>
     </ThemeProvider>
