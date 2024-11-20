@@ -37,7 +37,6 @@ export default function Addcar() {
     });
 
     if(!result.canceled) {
-      console.log(result);
       setSelectedImage(result.assets[0].uri)
     } else {
       alert('You did not select any image.');
@@ -56,11 +55,9 @@ export default function Addcar() {
     try {
       const cars = collection(db, "Cars")
       const res = await addDoc(cars, carData)
-      console.log(res.id)
       if(res){
         setID(res.id)
         await setDoc(res, {id: res.id}, {merge: true})
-        console.log("ID added", id)
       }
       
       if(selectedImage) {
@@ -68,13 +65,10 @@ export default function Addcar() {
         const imageRef = ref(storage, `${res.id}.jpg`);
         const img = await fetch(selectedImage);
         const bytes = await img.blob();
-        console.log("Bytes", bytes)
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
-        // console.log("ImageURL", imageURL)
         await setDoc(res, {imageURL: imageURL}, {merge: true});
-        // console.log("image uploaded")
 
       }
 

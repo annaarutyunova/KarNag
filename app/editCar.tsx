@@ -24,17 +24,14 @@ export default function Addcar() {
   const [carMileage, setMileage] = useState(ensureString(mileage) || '');
   const [selectedCarImage, setSelectedImage] = useState(ensureString(imageURL) || '');
   const color = useThemeColor({light: "black", dark: "#B5B5B5"}, "text")
-  console.log(selectedCarImage)
 
   const pickImageAsync = async () => {
-    console.log("picking image")
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1,
     });
 
     if(!result.canceled) {
-      console.log(result.assets[0].uri);
       setSelectedImage(result.assets[0].uri)
     }
   };
@@ -51,33 +48,28 @@ export default function Addcar() {
     try {
       const carRef = doc(db, 'Cars', ensureString(id))
       const res = await updateDoc(carRef, carData)
-      console.log("Updated successfully")
       
       if(selectedCarImage && selectedCarImage != imageURL) {
         // Create a storage reference from our storage service
         const imageRef = ref(storage, `${id}.jpg`);
         const img = await fetch(selectedCarImage);
         const bytes = await img.blob();
-        console.log("Edit car bytes", bytes)
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
-        console.log("Image URL in edit car", imageURL)
         await setDoc(carRef, {imageURL: imageURL}, {merge: true});
 
       }
-
       setMake(''); 
       setModel(''); 
       setMileage(''); 
       setYear(''); 
       setSelectedImage('');
-
+      router.back()
       // router.push({pathname:"/car"})
     } catch(error) {
       console.error(`Error updating car: `, error)
     }
-  
   }
   
   return (

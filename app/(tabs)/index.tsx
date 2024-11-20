@@ -50,7 +50,7 @@ export default function Car() {
         <ScrollView contentContainerStyle={styles.scrollView}>
           {cars.map((car, index) => (
             <Link key={index} style={styles.box} href={{
-              pathname:'/car',
+              pathname:'/screens/car',
               params: {
                 id: car.id,
                 make: car.make,

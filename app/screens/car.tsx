@@ -64,6 +64,7 @@ export default function Car() {
           <ThemedText>Mileage: {mileage}</ThemedText>
         </ThemedView>
       </ThemedView>
+      
 
       {/* {loading && <ActivityIndicator color="#00ff00" />}
       {error && <Text style={styles.errorText}>Error: {error}</Text>}

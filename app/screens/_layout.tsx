@@ -1,23 +1,34 @@
-import { Stack } from 'expo-router';
+import { Tabs } from 'expo-router';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Layout() {
   return (
-    <Stack>
-      <Stack.Screen
-        name="addcar"
+    <Tabs>
+      <Tabs.Screen
+        name="car"
         options={{
-          title: "Add New Car",
+          title: "Car",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <AntDesign name='car' color={color} size={24} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="gaslog"
+        options={{
+          title: "Gas Log",
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="car"
+      <Tabs.Screen
+        name="maintenance"
         options={{
-          title: "The car",
-          headerShown: true,
+          title: "Maintenance",
+          headerShown: false,
         }}
       />
      
-    </Stack>
+    </Tabs>
   );
 }
