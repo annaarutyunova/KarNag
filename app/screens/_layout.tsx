@@ -1,5 +1,7 @@
 import { Tabs } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 export default function Layout() {
   return (
@@ -19,6 +21,9 @@ export default function Layout() {
         options={{
           title: "Gas Log",
           headerShown: false,
+          tabBarIcon: ({ color, focused}) => (
+            <FontAwesome5 name="gas-pump" size={24} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -26,6 +31,9 @@ export default function Layout() {
         options={{
           title: "Maintenance",
           headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome6 name="wrench" size={24} color={color} />
+          )
         }}
       />
      
