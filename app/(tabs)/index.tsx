@@ -5,18 +5,9 @@ import { db } from '@/firebase.config'; // Import Firestore instance
 import { Link } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-
-interface Car {
-  id: string,
-  make: string;
-  model: string;
-  mileage: number;
-  year: number;
-  imageURL: string;
-}
-
+import Vehicle from '@/types/Vehicle'
 export default function Car() {
-  const [cars, setCars] = useState<Car[]>([]);
+  const [cars, setCars] = useState<Vehicle[]>([]);
   
 
   useEffect(() => {
@@ -25,7 +16,7 @@ export default function Car() {
         const carsCollection = collection(db, 'Cars');
         const carsSnapshot = await getDocs(carsCollection);
         const carsList = carsSnapshot.docs.map(doc => doc.data());
-        setCars(carsList as Car[]);
+        setCars(carsList as Vehicle[]);
         console.log()
       } catch (error) {
         console.error('Error fetching cars data: ', error);
@@ -35,14 +26,6 @@ export default function Car() {
     fetchCars();
   }, []);
   
-  // type carProps = {
-  //   // id: string,
-  //   imageURL: string,
-  //   make: string,
-  //   model: string,
-  //   year: number,
-  //   mileage: number
-  // }
 
   return (
       <ThemedView style={styles.container}>

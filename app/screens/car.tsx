@@ -4,8 +4,6 @@ import { ThemedView } from '@/components/ThemedView';
 import { StyleSheet, Image } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-const maintenanceDataFile = require('@/assets/hondapilot.json');
-
 
 export default function Car() { 
   const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
