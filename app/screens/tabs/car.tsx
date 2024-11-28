@@ -4,25 +4,27 @@ import { ThemedView } from '@/components/ThemedView';
 import { StyleSheet, Image } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { useCarContext } from '@/context/CarContext';
 
 export default function Car() { 
   const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
+  const { car, setCar } = useCarContext();
+  useEffect(() => {
+    setCar({
+      id: id as string,
+      make: make as string,
+      model: model as string,
+      year: Number(year),
+      mileage: Number(mileage),
+      imageURL: imageURL as string,
+    });
+  }, [id, make, model, year, mileage, imageURL, setCar]);
 
   return (
     <ThemedView>
       <ThemedView style={styles.box}>
         <Link style={styles.button}
-        href={{
-          pathname:'/editCar',
-          params: {
-            id: id,
-            make: make,
-            model: model,
-            year: year,
-            mileage: mileage,
-            imageURL: imageURL
-          }
-          }}>  
+        href='/screens/editCar'>
           <FontAwesome5 name="edit" size={20} color="green" />
         </Link>
         <Image

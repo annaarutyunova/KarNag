@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, createContext} from 'react';
 import { StyleSheet, ScrollView, Image} from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase.config'; // Import Firestore instance
@@ -6,6 +6,10 @@ import { Link } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import Vehicle from '@/types/Vehicle'
+import CarContextType from '@/types/CarContextType';
+
+const CarContext = createContext<CarContextType | undefined>(undefined)
+
 export default function Car() {
   const [cars, setCars] = useState<Vehicle[]>([]);
   
@@ -33,7 +37,7 @@ export default function Car() {
         <ScrollView contentContainerStyle={styles.scrollView}>
           {cars.map((car, index) => (
             <Link key={index} style={styles.box} href={{
-              pathname:'/screens/car',
+              pathname:'/screens/tabs/car',
               params: {
                 id: car.id,
                 make: car.make,

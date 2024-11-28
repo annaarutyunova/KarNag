@@ -1,7 +1,7 @@
-import { Text } from 'react-native'
+import { ThemedText } from "@/components/ThemedText"
 
-export default function GasLog() {
+export default function Profile() {
   return (
-    <Text>Maintenance</Text>
+    <ThemedText>Profile</ThemedText>
   )
 }

@@ -3,10 +3,13 @@ import { StyleSheet } from 'react-native'
 import { Text, View, ActivityIndicator, ScrollView } from 'react-native'
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useCarContext } from '@/context/CarContext';
+
 const maintenanceDataFile = require('@/assets/hondapilot.json');
 
 
-export default function GasLog() {
+export default function Maintenance() {
+  const { car } = useCarContext();
   interface MaintenanceRecord {
     desc: string;
     due_mileage: number;
@@ -35,10 +38,13 @@ export default function GasLog() {
     fetchMaintenanceData();
   }, []);
   
-
+ if(!car) {
+  return <ThemedText>No car selected</ThemedText>
+ }
 
   return (
     <ThemedView>
+      <ThemedText>Mileage: {car.mileage}</ThemedText>
       {loading && <ActivityIndicator color="#00ff00" />}
         {error && <Text style={styles.errorText}>Error: {error}</Text>}
         {maintenanceData && (

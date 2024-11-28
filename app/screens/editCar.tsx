@@ -1,29 +1,44 @@
-import React, {useState} from 'react';
-import { StyleSheet, TextInput, Pressable, Image, ScrollView } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, TextInput, Pressable, Image, ScrollView, ActivityIndicator } from 'react-native';
 import Button from '@/components/Button';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { setDoc, updateDoc, doc } from 'firebase/firestore';
 import { db, storage } from '@/firebase.config'; 
 import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-
-function ensureString(value: string | string[] | undefined): string {
-  return Array.isArray(value) ? value[0] : value || '';
-}
+import { useCarContext, CarProvider } from '@/context/CarContext';
+// import CarContextType from '@/types/CarContext';
 
 
-export default function Addcar() {
-  const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
-
+export default function EditCar() {
+  const { car, setCar } = useCarContext();
   const router = useRouter();
-  const [carMake, setMake] = useState(ensureString(make) || '');
-  const [carModel, setModel] = useState(ensureString(model) || '');
-  const [carYear, setYear] = useState(ensureString(year) || '');
-  const [carMileage, setMileage] = useState(ensureString(mileage) || '');
-  const [selectedCarImage, setSelectedImage] = useState(ensureString(imageURL) || '');
+  const [carMake, setMake] = useState(car?.make || '');
+  const [carModel, setModel] = useState(car?.model || '');
+  const [carYear, setYear] = useState(car?.year || '');
+  const [carMileage, setMileage] = useState(car?.mileage || '');
+  const [selectedCarImage, setSelectedImage] = useState(car?.imageURL || '');
   const color = useThemeColor({light: "black", dark: "#B5B5B5"}, "text")
+  if (!car) {
+    return (
+      <ThemedView>
+        <ActivityIndicator size='large' color={color} />
+        <ThemedText>{carMake}</ThemedText>
+      </ThemedView>
+  )
+  }
+  useEffect(() => {
+    if (car) {
+      setMake(car.make);
+      setModel(car.model);
+      setYear(car.year.toString());
+      setMileage(car.mileage.toString());
+      setSelectedImage(car.imageURL);
+    }
+  }, [car]);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -38,35 +53,30 @@ export default function Addcar() {
 
   const saveCar = async () => {
     const carData = {
-      id: id,
+      id: car.id,
       make: carMake,
       model: carModel,
-      year: carYear,
-      mileage: carMileage,
+      year: Number(carYear),
+      mileage: Number(carMileage),
       imageURL: selectedCarImage,
     }
     try {
-      const carRef = doc(db, 'Cars', ensureString(id))
+      const carRef = doc(db, 'Cars', car.id)
       const res = await updateDoc(carRef, carData)
       
-      if(selectedCarImage && selectedCarImage != imageURL) {
+      if(selectedCarImage && selectedCarImage != car.imageURL) {
         // Create a storage reference from our storage service
-        const imageRef = ref(storage, `${id}.jpg`);
+        const imageRef = ref(storage, `${car.id}.jpg`);
         const img = await fetch(selectedCarImage);
         const bytes = await img.blob();
         await uploadBytes(imageRef, bytes);
 
         const imageURL = await getDownloadURL(imageRef);
         await setDoc(carRef, {imageURL: imageURL}, {merge: true});
-
+        carData.imageURL = imageURL;
       }
-      setMake(''); 
-      setModel(''); 
-      setMileage(''); 
-      setYear(''); 
-      setSelectedImage('');
+      setCar(carData);
       router.back()
-      // router.push({pathname:"/car"})
     } catch(error) {
       console.error(`Error updating car: `, error)
     }
@@ -78,7 +88,7 @@ export default function Addcar() {
       <Image
           style={styles.image}
           source={{
-          uri: `${imageURL}`
+          uri: `${car.imageURL}`
         }}></Image>
       <TextInput
         editable
@@ -101,7 +111,7 @@ export default function Addcar() {
         editable={true}
         style={[styles.input, {color: color}, {borderColor: color}]}
         onChangeText={setYear}
-        value={carYear}
+        value={carYear.toString()}
         placeholder="Year"
         keyboardType="numeric"
         placeholderTextColor={color}
@@ -110,7 +120,7 @@ export default function Addcar() {
         editable={true}
         style={[styles.input, {color: color}, {borderColor: color}]}
         onChangeText={setMileage}
-        value={carMileage}
+        value={carMileage.toString()}
         placeholder="Mileage"
         keyboardType="numeric"
         placeholderTextColor={color}
