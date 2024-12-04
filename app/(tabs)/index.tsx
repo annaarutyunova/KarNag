@@ -36,7 +36,8 @@ export default function Car() {
       
         <ScrollView contentContainerStyle={styles.scrollView}>
           {cars.map((car, index) => (
-            <Link key={index} style={styles.box} href={{
+            <Link key={index} style={styles.box} 
+            href={{
               pathname:'/screens/tabs/car',
               params: {
                 id: car.id,
@@ -46,7 +47,8 @@ export default function Car() {
                 mileage: car.mileage,
                 imageURL: car.imageURL
               }
-              }}>
+              }}
+              >
               <ThemedView style={styles.box}>
                 <Image
                   style={styles.image}
