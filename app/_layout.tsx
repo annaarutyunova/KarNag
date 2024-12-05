@@ -1,5 +1,6 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Stack, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -37,13 +38,15 @@ export default function RootLayout() {
   const activeScreen = segments[segments.length - 1];
   const headerTitle = screenTitles[activeScreen] || "Default Screen";
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ title: 'All Cars', headerShown: false }} />
-        <Stack.Screen name="addcar" options={{ title: 'Add New Car', headerShown: true }} />
-        <Stack.Screen name="screens" options={{ title: headerTitle, headerShown: true }} />
-        <Stack.Screen name="+not-found"  />
-      </Stack>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ title: 'All Cars', headerShown: false }} />
+          <Stack.Screen name="addcar" options={{ title: 'Add New Car', headerShown: true }} />
+          <Stack.Screen name="screens" options={{ title: headerTitle, headerShown: true }} />
+          <Stack.Screen name="+not-found"  />
+        </Stack>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
