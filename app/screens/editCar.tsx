@@ -76,7 +76,21 @@ export default function EditCar() {
         carData.imageURL = imageURL;
       }
       setCar(carData);
+      console.log("CarData",carData)
+      // router.reload("/(tabs)")
+      
+      // router.setParams({make:carData.make, model:carData.model, year:carData.year, mileage:carData.mileage, imageURL:carData.imageURL});
       router.back()
+      // router.push({pathname:'/screens/tabs/car', 
+      //   params: {
+      //     id: car.id,
+      //     make: car.make,
+      //     model: car.model,
+      //     year: car.year,
+      //     mileage: carData.mileage,
+      //     imageURL: car.imageURL
+      //   }
+      //   })
     } catch(error) {
       console.error(`Error updating car: `, error)
     }

@@ -21,7 +21,6 @@ export default function Car() {
         const carsSnapshot = await getDocs(carsCollection);
         const carsList = carsSnapshot.docs.map(doc => doc.data());
         setCars(carsList as Vehicle[]);
-        console.log()
       } catch (error) {
         console.error('Error fetching cars data: ', error);
       }

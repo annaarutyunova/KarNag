@@ -7,21 +7,21 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { useCarContext } from '@/context/CarContext';
 
 export default function Car() { 
-  const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
+  console.log()
   const { car, setCar } = useCarContext();
+  const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
   useEffect(() => {
     setCar({
-      id: id as string,
-      make: make as string,
-      model: model as string,
-      year: Number(year),
-      mileage: Number(mileage),
-      imageURL: imageURL as string,
+      id: car?.id || id as string,
+      make: car?.make  || make as string,
+      model: car?.model || model as string,
+      year: car?.year || Number(year),
+      mileage: car?.mileage || Number(mileage),
+      imageURL: car?.imageURL || imageURL as string,
     });
   }, [id, make, model, year, mileage, imageURL, setCar]);
-
   return (
-    <ThemedView>
+    <ThemedView key={car?.id}>
       <ThemedView style={styles.box}>
         <Link style={styles.button}
         href='/screens/editCar'>
@@ -33,9 +33,9 @@ export default function Car() {
           uri: `${imageURL}`
             }}></Image>
         <ThemedView style={styles.carInfo}>
-          <ThemedText>{make} {model}</ThemedText>
-          <ThemedText>Year: {year}</ThemedText>
-          <ThemedText>Mileage: {mileage}</ThemedText>
+          <ThemedText>{car?.make} {car?.model}</ThemedText>
+          <ThemedText>Year: {car?.year}</ThemedText>
+          <ThemedText>Mileage: {car?.mileage}</ThemedText>
         </ThemedView>
       </ThemedView>
     </ThemedView>
