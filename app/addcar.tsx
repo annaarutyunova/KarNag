@@ -88,42 +88,44 @@ export default function Addcar() {
   
   return (
     
-    <ThemedView>
-      <TextInput
-        editable
-        style={[styles.input, {color: color}, {borderColor: color}]}
-        onChangeText={setMake}
-        value={make}
-        placeholder="Make"
-        placeholderTextColor={color}
-      />
-      <TextInput
-        editable
-        style={[styles.input, {color: color}, {borderColor: color}]}
-        onChangeText={setModel}
-        value={model}
-        placeholder="Model"
-        placeholderTextColor={color}
-      />
-      <TextInput
-        editable={true}
-        style={[styles.input, {color: color}, {borderColor: color}]}
-        onChangeText={setYear}
-        value={year}
-        placeholder="Year"
-        keyboardType="numeric"
-        placeholderTextColor={color}
-      />
-      <TextInput
-        editable={true}
-        style={[styles.input, {color: color}, {borderColor: color}]}
-        onChangeText={setMileage}
-        value={mileage}
-        placeholder="Mileage"
-        keyboardType="numeric"
-        placeholderTextColor={color}
-      />
-        <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.form}>
+        <TextInput
+          editable
+          style={[styles.input, {color: color}, {borderColor: color}]}
+          onChangeText={setMake}
+          value={make}
+          placeholder="Make"
+          placeholderTextColor={color}
+        />
+        <TextInput
+          editable
+          style={[styles.input, {color: color}, {borderColor: color}]}
+          onChangeText={setModel}
+          value={model}
+          placeholder="Model"
+          placeholderTextColor={color}
+        />
+        <TextInput
+          editable={true}
+          style={[styles.input, {color: color}, {borderColor: color}]}
+          onChangeText={setYear}
+          value={year}
+          placeholder="Year"
+          keyboardType="numeric"
+          placeholderTextColor={color}
+        />
+        <TextInput
+          editable={true}
+          style={[styles.input, {color: color}, {borderColor: color}]}
+          onChangeText={setMileage}
+          value={mileage}
+          placeholder="Mileage"
+          keyboardType="numeric"
+          placeholderTextColor={color}
+        />
+      </ThemedView>
+      <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
       <Pressable style={styles.saveContainer} onPress={saveCar}>
         <ThemedText style={[styles.save, {borderColor: color}]}>Save</ThemedText>
       </Pressable>
@@ -132,6 +134,15 @@ export default function Addcar() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  form: {
+    display: 'flex',
+    gap: 20,
+    marginBottom: 20,
+  },
   save: {
     marginTop: 20,
     padding: 10,
@@ -144,7 +155,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   input: {
-    margin: 12,
     borderWidth: 1,
     padding: 12,
     borderRadius: 8,

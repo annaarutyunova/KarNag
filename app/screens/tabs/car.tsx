@@ -21,7 +21,7 @@ export default function Car() {
     });
   }, [id, make, model, year, mileage, imageURL, setCar]);
   return (
-    <ThemedView key={car?.id}>
+    <ThemedView style={styles.container}>
       <ThemedView style={styles.box}>
         <Link style={styles.button}
         href='/screens/editCar'>
@@ -43,13 +43,17 @@ export default function Car() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16
+  },
   button: {
     fontSize: 40,
-    padding: 12,
+    // padding: 12,
     textAlign: 'center',
     position: 'absolute',
     right: 20,
-    top: 5
+    top: 0
   },
   image: {
     width: 150,
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   scrollView: {
-    flexGrow: 1, // Allows the ScrollView to take up all available space
+    // flexGrow: 1, // Allows the ScrollView to take up all available space
     justifyContent: 'center', // Center content vertically
     paddingBottom: 20, // Add bottom padding for better scrolling
   },
