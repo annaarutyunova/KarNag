@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 20,
-    marginBottom: 20,
     position: 'relative'
   },
   carInfo: {

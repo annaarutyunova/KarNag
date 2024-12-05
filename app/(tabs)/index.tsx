@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import Vehicle from '@/types/Vehicle';
 import { Swipeable } from 'react-native-gesture-handler';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Car() {
   const [cars, setCars] = useState<Vehicle[]>([]);
@@ -97,7 +98,7 @@ export default function Car() {
         ))}
       </ScrollView>
       <Link href="/addcar" style={styles.button}>
-        <ThemedText style={styles.button}>+</ThemedText>
+        <AntDesign name="pluscircleo" size={34} color='#ffd33d' />
       </Link>
     </ThemedView>
   );
@@ -117,9 +118,11 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    fontSize: 40,
     padding: 12,
     textAlign: 'center',
+  },
+  plus: {
+    fontSize: 40
   },
   image: {
     width: 150,
@@ -131,17 +134,14 @@ const styles = StyleSheet.create({
   box: {
     display: 'flex',
     flexDirection: 'row',
-    // gap: 20,
-    // marginBottom: 20,
     borderRadius: 10,
     overflow: 'hidden',
     alignItems: 'center'
-    // backgroundColor: 'white'
   },
   carInfo: {
     display: 'flex',
     justifyContent: 'space-around',
-    paddingLeft: 20,
+    padding: 20,
   },
   deleteButton: {
     backgroundColor: 'red',

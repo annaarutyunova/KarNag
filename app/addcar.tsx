@@ -124,7 +124,7 @@ export default function Addcar() {
         placeholderTextColor={color}
       />
         <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-      <Pressable onPress={saveCar}>
+      <Pressable style={styles.saveContainer} onPress={saveCar}>
         <ThemedText style={[styles.save, {borderColor: color}]}>Save</ThemedText>
       </Pressable>
     </ThemedView>
@@ -139,6 +139,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 80,
     borderRadius: 8,
+  },
+  saveContainer: {
+    alignSelf: 'flex-end'
   },
   input: {
     margin: 12,
