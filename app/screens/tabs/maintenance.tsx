@@ -43,7 +43,7 @@ export default function Maintenance() {
  }
 
   return (
-    <ThemedView>
+    <ThemedView style={styles.container}>
       <ThemedText>Mileage: {car.mileage}</ThemedText>
       {loading && <ActivityIndicator color="#00ff00" />}
         {error && <Text style={styles.errorText}>Error: {error}</Text>}
@@ -62,6 +62,10 @@ export default function Maintenance() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16
+  },
   button: {
     fontSize: 40,
     padding: 12,
