@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { Text, View, ActivityIndicator, ScrollView, Modal, Pressable } from 'react-native'
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/firebase.config'
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useCarContext } from '@/context/CarContext';
@@ -35,17 +37,59 @@ export default function Maintenance() {
   const [selectedRecord, setSElectedRecord] = useState<MaintenanceRecord | null>(null);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
+
+
+
+  // const fetchMaintenanceData = async () => {
+  //   try{
+  //     if(maintenanceDataFile) {
+  //       setMaintenanceData(maintenanceDataFile);
+  //       setLoading(false);
+  //       return
+  //     }
+  //   } catch (error: any) {
+  //     setLoading(false);
+  //   }
+  // }
+
   const fetchMaintenanceData = async () => {
-    try{
-      if(maintenanceDataFile) {
-        setMaintenanceData(maintenanceDataFile);
-        setLoading(false);
-        return
+    if (!car) {
+      setError("No car selected");
+      setLoading(false);
+      return;
+    }
+
+    const docId = `${car.make[0].toUpperCase() + car.make.slice(1)}${car.model[0].toUpperCase() + car.model.slice(1)}${car.year}`; // Generate document ID
+    console.log("docID", docId)
+    const docRef = doc(db, "Maintenance", docId); // Replace 'carMaintenance' with your collection name
+
+    try {
+      const docSnap = await getDoc(docRef);
+      console.log("Doc snap", docSnap.data)
+      if (docSnap.exists()) {
+        // Document exists
+        setMaintenanceData(docSnap.data().data); // Assuming `data` contains an array of maintenance records
+      } else {
+        // Document does not exist
+        console.log("No maintenance data found for this car. Let's add it to the database");
+        try{
+          if(maintenanceDataFile) {
+            setMaintenanceData(maintenanceDataFile);
+            setLoading(false);
+            return
+          }
+        } catch (error: any) {
+          setLoading(false);
+        }
       }
-    } catch (error: any) {
+    } catch (err) {
+      console.error("Error fetching maintenance data:", err);
+      setError("Failed to fetch data. Please try again later.");
+    } finally {
       setLoading(false);
     }
-  }
+  };
+
   useEffect(() => {
     fetchMaintenanceData();
   }, []);
@@ -54,6 +98,7 @@ export default function Maintenance() {
   const openModal = (record: MaintenanceRecord) => {
     setSElectedRecord(record);
     setModalVisible(true);
+    console.log(car?.make, car?.model)
   };
   const closeModal = () => {
     setModalVisible(false);
