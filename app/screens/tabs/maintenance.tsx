@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { Text, View, ActivityIndicator, ScrollView, Modal, Pressable } from 'react-native'
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, addDoc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase.config'
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -22,6 +22,11 @@ const maintenanceDataFile = require('@/assets/hondapilot.json');
 
 export default function Maintenance() {
   const { car } = useCarContext();
+  let year = car?.year
+  let make = car?.make
+  let model = car?.model
+
+  const apiURL =`http://api.carmd.com/v3.0/maintlist?year=${year}&make=${make.toUpperCase()}&model=${model.toUpperCase()}`
   interface MaintenanceRecord {
     desc: string;
     due_mileage: number;
@@ -30,65 +35,89 @@ export default function Maintenance() {
     data: MaintenanceRecord[];
   }
 
-  
   const [maintenanceData, setMaintenanceData] = useState<MaintenanceRecord[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedRecord, setSElectedRecord] = useState<MaintenanceRecord | null>(null);
+  const [selectedRecord, setSelectedRecord] = useState<MaintenanceRecord | null>(null);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
-
-
-
-  // const fetchMaintenanceData = async () => {
-  //   try{
-  //     if(maintenanceDataFile) {
-  //       setMaintenanceData(maintenanceDataFile);
-  //       setLoading(false);
-  //       return
-  //     }
-  //   } catch (error: any) {
-  //     setLoading(false);
-  //   }
-  // }
+  const saveMaintenanceToFirestore = async (carId: string, data: MaintenanceData) => {
+    try {
+      // Transform API response into Firestore-friendly format
+      const maintenanceObj = data.data.reduce((acc, record) => {
+        acc[record.desc] = record.due_mileage; // Map description as the key and due_mileage as the value
+        return acc;
+      }, {} as Record<string, number>);
+  
+      // Save the formatted object into Firestore under the given car ID
+      const docRef = doc(db, "Maintenance", carId);
+      await setDoc(docRef, maintenanceObj);
+  
+      console.log("Maintenance data saved successfully!");
+    } catch (error) {
+      console.error("Error saving maintenance data to Firestore:", error);
+    }
+  };
 
   const fetchMaintenanceData = async () => {
-    if (!car) {
-      setError("No car selected");
-      setLoading(false);
-      return;
-    }
-
-    const docId = `${car.make[0].toUpperCase() + car.make.slice(1)}${car.model[0].toUpperCase() + car.model.slice(1)}${car.year}`; // Generate document ID
-    console.log("docID", docId)
-    const docRef = doc(db, "Maintenance", docId); // Replace 'carMaintenance' with your collection name
-
     try {
-      const docSnap = await getDoc(docRef);
-      console.log("Doc snap", docSnap.data)
-      if (docSnap.exists()) {
-        // Document exists
-        setMaintenanceData(docSnap.data().data); // Assuming `data` contains an array of maintenance records
-      } else {
-        // Document does not exist
-        console.log("No maintenance data found for this car. Let's add it to the database");
-        try{
-          if(maintenanceDataFile) {
-            setMaintenanceData(maintenanceDataFile);
-            setLoading(false);
-            return
-          }
-        } catch (error: any) {
-          setLoading(false);
-        }
+      if (!car) {
+        setError("No car selected");
+        setLoading(false);
+        return;
       }
-    } catch (err) {
-      console.error("Error fetching maintenance data:", err);
-      setError("Failed to fetch data. Please try again later.");
-    } finally {
+  
+      setLoading(true);
+      const carId = `${car.make[0].toUpperCase() + car.make.slice(1)}${car.model[0].toUpperCase() + car.model.slice(1)}${car.year}`; // Generate document ID
+  
+      // Check if data exists in Firestore
+      const docRef = doc(db, "Maintenance", carId);
+      const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        // Data exists in Firestore
+        const firestoreData = docSnap.data();
+        // Transform Firestore data back into array format for rendering
+        const formattedData = Object.entries(firestoreData).map(([desc, due_mileage]) => ({
+          desc,
+          due_mileage,
+        }));
+        setMaintenanceData(formattedData);
+        setLoading(false);
+        return; // Exit here if data is found
+      }
+  
+      // Data does not exist, fetch from API
+      const response = await fetch(apiURL, {
+        method: "GET",
+        headers: {
+          'Partner-Token': process.env.EXPO_PUBLIC_PARTNER_TOKEN as string,
+          'Authorization': process.env.EXPO_PUBLIC_AUTHORIZATION as string,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch maintenance data from API");
+      }
+  
+      const data: MaintenanceData = await response.json();
+  
+      // Save the fetched data to Firestore
+      await saveMaintenanceToFirestore(carId, data);
+  
+      // Set state with the fetched data
+      setMaintenanceData(data.data);
+      setLoading(false);
+      console.log("Data fetched and saved successfully!");
+    } catch (error) {
+      console.error("Error fetching or saving maintenance data:", error);
+      setError(error instanceof Error ? error.message : "Unknown error");
       setLoading(false);
     }
   };
+  
+  
 
   useEffect(() => {
     fetchMaintenanceData();
@@ -96,13 +125,12 @@ export default function Maintenance() {
 
 
   const openModal = (record: MaintenanceRecord) => {
-    setSElectedRecord(record);
+    setSelectedRecord(record);
     setModalVisible(true);
-    console.log(car?.make, car?.model)
   };
   const closeModal = () => {
     setModalVisible(false);
-    setSElectedRecord(null);
+    setSelectedRecord(null);
   }
   
  if(!car) {

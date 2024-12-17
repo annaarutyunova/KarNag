@@ -76,7 +76,7 @@ export default function EditCar() {
         carData.imageURL = imageURL;
       }
       setCar(carData);
-      console.log("CarData",carData)
+      // console.log("CarData",carData)
       // router.reload("/(tabs)")
       
       // router.setParams({make:carData.make, model:carData.model, year:carData.year, mileage:carData.mileage, imageURL:carData.imageURL});

@@ -7,7 +7,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { useCarContext } from '@/context/CarContext';
 
 export default function Car() { 
-  console.log()
+  // console.log()
   const { car, setCar } = useCarContext();
   const { id, make, model, year, mileage, imageURL } = useLocalSearchParams();
   useEffect(() => {
